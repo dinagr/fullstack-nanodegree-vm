@@ -68,11 +68,7 @@ def playerStandings():
     c = DB.cursor();
     # Get the matches where the player won and all the matches he participated
     # Order by the number of wins descending
-    c.execute("select p.ID, p.name,"
-              "(select count(*) from match where winner  = p.id) \"wins\","
-              "(select count(*) from match where p.id in (loser,winner)) \"matches\""
-              "from players p "
-              "order by 3 desc");
+    c.execute("select * from getPlayerStandings");
     resultList = c.fetchall();
     DB.close();
     return resultList;
