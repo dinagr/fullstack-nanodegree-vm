@@ -33,7 +33,6 @@ def countPlayers():
     c = DB.cursor();
     c.execute("select count(*) from players");
     result = c.fetchone()[0];
-    print (result);
     DB.close();
     return result;
 
@@ -107,21 +106,18 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """         
-    DB = connect();
-    c = DB.cursor();
-    # Join between all the players that had the same amount of wins
-    # Create pairs from these players
-    c.execute("select p1.ID, p1.name, p2.ID, p2.name "
-              "from (select ID, name, (select count(*) "
-              "from match where ID = winner) \"wins\" " 
-              "from players) p1 "
-              "inner join (select ID, name, (select count(*) "
-              "from match where ID = winner) \"wins\" " 
-              "from players) p2 on p1.wins = p2.wins "
-              "where p1.ID < p2.ID");
-    pairs = c.fetchall();
-    DB.close();
-    return pairs;
+    playersList = playerStandings();
+    swiss_pairings = []
+    tmp_list = []
+    for index in range(len(playersList)-1):
+        if(index % 2 == 0):
+            tmp_list.append(playersList[index][0])
+            tmp_list.append(playersList[index][1])
+            tmp_list.append(playersList[index+1][0])
+            tmp_list.append(playersList[index+1][1])
+            swiss_pairings.append(tuple(tmp_list))
+            tmp_list = []
+    return swiss_pairings;
 
     
 

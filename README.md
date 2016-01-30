@@ -2,8 +2,8 @@
 
 ###Instructions to open the app
 
-1. Make sure that you have python and Postrage SQL installed on you romputer
-2. Create the database and the tabled according to the tournament.SQL file
+1. Make sure that you have python and Postrage SQL installed on you computer
+2. Create the database and the tables according to the tournament.SQL file
 3. Run the tournament_test.py file to activate the program and to test it 
 </br>
 OR

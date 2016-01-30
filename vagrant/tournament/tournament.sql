@@ -6,11 +6,21 @@
 -- You can write comments in this file by starting them with two dashes, like
 -- these lines here.
 
+DROP DATABASE IF EXISTS tournaments;
 CREATE DATABASE tournaments;
-CREATE TABLE players(ID serial Primary Key, name varchar(40));
-CREATE TABLE match(matchID serial Primary Key, winner int REFERENCES players(ID), loser int REFERENCES players(ID));
-CREATE TABLE tournaments(tournamentID serial Primat Key, name varchar(40));
-CREATE TABLE tourMatch(tournamentID int REFERENCES tournaments,matchID int REFERENCES int match); 
+\c tournaments
+CREATE TABLE players
+(
+    ID serial Primary Key,
+    name varchar(40)
+);
+CREATE TABLE match
+(
+    matchID serial Primary Key,
+    winner int REFERENCES players(ID),
+    loser int REFERENCES players(ID)
+);
+
 
 
 
